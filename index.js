@@ -3,7 +3,6 @@ import { PrismaClient } from "@prisma/client"
 import bodyParser from "body-parser"
 import bcrypt from "bcrypt"
 import { verifyKey } from './middlewares/auth.js' 
-import {google} from "@ai-sdk/google"
 import { generateText } from 'ai'
 import { openai } from '@ai-sdk/openai';
 
@@ -81,7 +80,7 @@ app.post("/check/user", async (req, res) => {
 app.post("/porkash", async(req, res) =>{
     try{
         const result = await generateText({
-            model: google("gpt-4-turbo"),
+            model: openai("gpt-4-turbo"),
             prompt: req.body.text
         })
         res.json(result.text)
