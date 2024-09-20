@@ -4,6 +4,7 @@ import bodyParser from "body-parser"
 import bcrypt from "bcrypt"
 import { verifyKey } from './middlewares/auth.js' 
 import { GoogleGenerativeAI } from '@google/generative-ai'
+import axios from 'axios'
 
 const PrismaClientSigleton = () => {
     return new PrismaClient();
