@@ -12,7 +12,7 @@ const PrismaClientSigleton = () => {
 };
 
 const bingAi = createGoogleGenerativeAI({
-    apiKey: process.env.GOOGLE_API_KEY// should ideally be loaded from external place such as env variable
+    apiKey:process.env.GOOGLE_API_KEY
  });
 
 const globalForPrisma = globalThis;
