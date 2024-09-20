@@ -90,9 +90,8 @@ app.post("/porkash", async(req, res) =>{
 
 app.get('/invest', async(req, res) =>{
     try{
-        const response = await fetch(`http://api.marketstack.com/v1/eod
-        ? access_key = ${process.env.MARKETSTACK_API_KEY}
-        & symbols = DJI.INDX`)
+        const response = await fetch(`https://api.finage.co.uk/agg/stock/AAPL/1/month/2020-02-05/2021-02-07?apikey=
+            ${process.env.MARKET_API_KEY}`)
         const data = await response.json()
         res.json(data)
     }catch(err){
@@ -100,6 +99,8 @@ app.get('/invest', async(req, res) =>{
         return res.status(500).send("Error")
     }
 })
+
+
 
 
 
