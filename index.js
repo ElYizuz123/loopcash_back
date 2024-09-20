@@ -3,8 +3,6 @@ import { PrismaClient } from "@prisma/client"
 import bodyParser from "body-parser"
 import bcrypt from "bcrypt"
 import { verifyKey } from './middlewares/auth.js' 
-import {google} from "@ai-sdk/google"
-import { generateText } from 'ai'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 
 const PrismaClientSigleton = () => {
@@ -88,6 +86,18 @@ app.post("/porkash", async(req, res) =>{
         return res.status(500).send("Error")
     }
     
+})
+
+app.get('/invest', async(req, res) =>{
+    try{
+        const response = await axios.get(`http://api.marketstack.com/v1/eod
+        ? access_key = ${process.env.MARKETSTACK_API_KEY}
+        & symbols = DJI.INDX`);
+        res.json(response.data);
+    }catch(err){
+        console.error('Error reading data', err)
+        return res.status(500).send("Error")
+    }
 })
 
 

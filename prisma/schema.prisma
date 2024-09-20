@@ -27,6 +27,7 @@ model Profile{
   name String
   password String
   total Float
+  idAvatar Int 
 }
 
 model Repeatable {
