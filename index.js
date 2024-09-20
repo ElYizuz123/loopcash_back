@@ -94,7 +94,7 @@ app.get('/invest', async(req, res) =>{
         const response = await axios.get(`http://api.marketstack.com/v1/eod
         ? access_key = ${process.env.MARKETSTACK_API_KEY}
         & symbols = DJI.INDX`);
-        res.json(response.text);
+        res.json(response.data);
     }catch(err){
         console.error('Error reading data', err)
         return res.status(500).send("Error")
