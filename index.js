@@ -74,11 +74,18 @@ app.post("/check/user", async (req, res) => {
 
 
 app.post("/porkash", async(req, res) =>{
-    const result = await generateText({
-        model: google("gemini-1.5-flash"),
-        prompt: req.body.text
-    })
-    res.json(result.text)
+    try{
+        const result = await generateText({
+            model: google("gemini-1.5-flash"),
+            prompt: req.body.text,
+            apiKey: process.env.GOOGLE_API_KEY
+        })
+        res.json(result.text)
+    }catch(ex){
+        console.error('Error reading data', err)
+        return res.status(500).send("Error")
+    }
+    
 })
 
 
