@@ -3,6 +3,8 @@ import { PrismaClient } from "@prisma/client"
 import bodyParser from "body-parser"
 import bcrypt from "bcrypt"
 import { verifyKey } from './middlewares/auth.js' 
+import {google} from "@ai-sdk/google"
+import { generateText } from 'ai'
 
 const PrismaClientSigleton = () => {
     return new PrismaClient();
@@ -68,6 +70,14 @@ app.post("/check/user", async (req, res) => {
         console.error('Error reading data', err)
         return res.status(500).send("Error")
     }
+})
+
+app.post("/porkash", async(req, res) =>{
+    const result = await generateText({
+        model: google("gemini-1.5-flash"),
+        prompt: req.body.text
+    })
+    res.json(result.text)
 })
 
 
