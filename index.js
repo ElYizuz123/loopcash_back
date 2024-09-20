@@ -3,13 +3,15 @@ import { PrismaClient } from "@prisma/client"
 import bodyParser from "body-parser"
 import bcrypt from "bcrypt"
 import { verifyKey } from './middlewares/auth.js' 
+import {google} from "@ai-sdk/google"
 import { generateText } from 'ai'
-import { openai } from '@ai-sdk/openai';
+import { GoogleGenerativeAI } from '@google/generative-ai'
 
 const PrismaClientSigleton = () => {
     return new PrismaClient();
 };
 
+const genAi = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY)
 const globalForPrisma = globalThis;
 
 const prisma = globalForPrisma.prisma ?? PrismaClientSigleton();
@@ -75,11 +77,12 @@ app.post("/check/user", async (req, res) => {
 
 app.post("/porkash", async(req, res) =>{
     try{
-        const result = await generateText({
-            model: openai("gpt-4-turbo"),
-            prompt: req.body.text
-        })
-        res.json(result.text)
+        const model = genAi.getGenerativeModel({model: "gemini-1.5-flash"})
+        const prompt= req.body.text
+        const result = await model.generateContent(prompt);
+        const response = result.response;
+        const text = response.text();
+        res.json(text)
     }catch(err){
         console.error('Error reading data', err)
         return res.status(500).send("Error")
