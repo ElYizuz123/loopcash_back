@@ -5,10 +5,15 @@ import bcrypt from "bcrypt"
 import { verifyKey } from './middlewares/auth.js' 
 import {google} from "@ai-sdk/google"
 import { generateText } from 'ai'
+import {createGoogleGenerativeAI} from "@ai-sdk/google"
 
 const PrismaClientSigleton = () => {
     return new PrismaClient();
 };
+
+const bingAi = createGoogleGenerativeAI({
+    apiKey: process.env.GOOGLE_API_KEY// should ideally be loaded from external place such as env variable
+ });
 
 const globalForPrisma = globalThis;
 
