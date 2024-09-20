@@ -72,7 +72,6 @@ app.post("/check/user", async (req, res) => {
     }
 })
 
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 
 app.post("/porkash", async(req, res) =>{
     const result = await generateText({
