@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "@ai-sdk/google": "^0.0.48",
+    "@ai-sdk/openai": "^0.0.61",
     "@prisma/client": "^5.19.1",
     "ai": "^3.3.43",
     "bcrypt": "^5.1.1",
