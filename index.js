@@ -4,6 +4,7 @@ import bodyParser from "body-parser"
 import bcrypt from "bcrypt"
 import { verifyKey } from './middlewares/auth.js' 
 import { GoogleGenerativeAI } from '@google/generative-ai'
+import axios from 'axios'
 
 const PrismaClientSigleton = () => {
     return new PrismaClient();
@@ -90,7 +91,7 @@ app.post("/porkash", async(req, res) =>{
 
 app.get('/invest', async(req, res) =>{
     try{
-        const response = await fetch(`http://api.marketstack.com/v1/eod
+        const response = await axios.get(`http://api.marketstack.com/v1/eod
         ? access_key = ${process.env.MARKETSTACK_API_KEY}
         & symbols = DJI.INDX`);
         res.json(response.text);
