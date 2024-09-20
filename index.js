@@ -42,6 +42,7 @@ app.post("/user", async (req, res) =>{
                 total: 0.0
             }
         })
+        res.json(user);
     }catch(e){
         console.error('Error reading data', err)
         return res.status(500).send("Error")
