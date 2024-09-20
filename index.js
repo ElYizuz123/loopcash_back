@@ -78,6 +78,7 @@ app.post("/porkash", async(req, res) =>{
         const result = await generateText({
             model: google("gemini-1.5-flash"),
             prompt: req.body.text,
+            loadApiKey: process.env.GOOGLE_API_KEY
         })
         res.json(result.text)
     }catch(err){
