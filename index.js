@@ -10,10 +10,6 @@ const PrismaClientSigleton = () => {
     return new PrismaClient();
 };
 
-const bingAi = createGoogleGenerativeAI({
-    apiKey:process.env.GOOGLE_API_KEY
- });
-
 const globalForPrisma = globalThis;
 
 const prisma = globalForPrisma.prisma ?? PrismaClientSigleton();
