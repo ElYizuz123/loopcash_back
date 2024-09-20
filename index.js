@@ -49,6 +49,25 @@ app.post("/user", async (req, res) =>{
     }
 })
 
+app.post("/check/user", async (req, res) => {
+    try{
+        const user = await prisma.Profile.findUnique({
+            where:{
+                user:req.body.user
+            }
+        })
+        if(!user) return res.status(404).send("No valid user") 
+
+        const matchPassword = await bcrypt.compare(req.body.password,user.password)
+
+        if(!matchPassword) res.status(404).send("No valid password") 
+        res.json(user.idUser)
+    }catch(ex){
+        console.error('Error reading data', err)
+        return res.status(500).send("Error")
+    }
+})
+
 
 
 app.listen(port, ()=>{
