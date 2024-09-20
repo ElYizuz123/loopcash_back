@@ -1,6 +1,7 @@
 import express from 'express'
 import { PrismaClient } from "@prisma/client"
 import bodyParser from "body-parser"
+import bcrypt from "bcrypt"
 
 const PrismaClientSigleton = () => {
     return new PrismaClient();
@@ -28,6 +29,23 @@ app.get("/", (req, res) =>{
         </body>
     </html>`
     res.send(htmlResponse)
+})
+
+app.post("/user", async (req, res) =>{
+    try{
+        const password = await bcrypt.hash(req.body.password, 10)
+        const user = await prisma.Profile.create({
+            data:{
+                user:req.body.user,
+                name:req.body.name,
+                password: password,
+                total: 0.0
+            }
+        })
+    }catch(e){
+        console.error('Error reading data', err)
+        return res.status(500).send("Error")
+    }
 })
 
 
