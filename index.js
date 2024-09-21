@@ -99,7 +99,7 @@ app.post("/porkash", async(req, res) =>{
         const initPromt="Para esta query toma en cuenta que se tienen estos datos"+movements
         const model = genAi.getGenerativeModel({model: "gemini-1.5-flash"})
         const prompt= req.body.text
-        const result = await model.generateContent(prompt);
+        const result = await model.generateContent(initPromt+prompt);
         const response = result.response;
         const text = response.text();
         res.json(text)
