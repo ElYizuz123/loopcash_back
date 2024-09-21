@@ -2,7 +2,6 @@ import express from 'express'
 import { PrismaClient } from "@prisma/client"
 import bodyParser from "body-parser"
 import bcrypt from "bcrypt"
-import { verifyKey } from './middlewares/auth.js' 
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import cors from 'cors'
 const config = require('./config')
