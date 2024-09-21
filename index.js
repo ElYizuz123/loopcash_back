@@ -96,7 +96,7 @@ app.post("/porkash", async(req, res) =>{
                 LoseType:true,
             }
         })
-        const initPromt="Para esta query toma en cuenta que se tienen estos datos, que representan toda mi información financiera, toma en cuenta que en repetible las M son de mensual"+movements.toString()
+        const initPromt="Para esta query toma en cuenta que se tienen estos datos, que representan toda mi información financiera, toma en cuenta que en repetible las M son de mensual"+JSON.stringify(movements)
         const model = genAi.getGenerativeModel({model: "gemini-1.5-flash"})
         const prompt= req.body.text
         const result = await model.generateContent(initPromt+prompt);
