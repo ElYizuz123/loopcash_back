@@ -90,6 +90,13 @@ app.post("/check/user", async (req, res) => {
 
 app.post("/porkash", async(req, res) =>{
     try{
+        const movements = await prisma.Movement.findMany({
+            include:{
+                Repeatable:true,
+                LoseType:true,
+            }
+        })
+        const initPromt="Para esta query toma en cuenta que se tienen estos datos"+movements
         const model = genAi.getGenerativeModel({model: "gemini-1.5-flash"})
         const prompt= req.body.text
         const result = await model.generateContent(prompt);
