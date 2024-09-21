@@ -96,7 +96,7 @@ app.post("/porkash", async(req, res) =>{
                 LoseType:true,
             }
         })
-        const initPromt="Para esta query toma en cuenta que se tienen estos datos, que representan toda mi información financiera, toma en cuenta que en repetible las M son de mensual"+JSON.stringify(movements)+"No es necesario que repitas mis datos en la respuesta, además toma en cuenta que estas siendo utilizada en una app para gestión de finanzas, por lo que apegate a ello, considera como prioridades la vida de la persona, su casa, comida, entre otras necesidades básicas"
+        const initPromt="Para esta query toma en cuenta que se tienen estos datos, que representan toda mi información financiera, toma en cuenta que en repetible las M son de mensual"+JSON.stringify(movements)+"No es necesario que repitas mis datos en la respuesta, además toma en cuenta que estas siendo utilizada en una app para gestión de finanzas, por lo que apegate a ello, considera como prioridades la vida de la persona, su casa, comida, entre otras necesidades básicas, además no utilices letras en negritas ni csímbolos de ese tipo, para evitar suciedad en la salida de texto"
         const model = genAi.getGenerativeModel({model: "gemini-1.5-flash"})
         const prompt= req.body.text
         const result = await model.generateContent(initPromt+prompt);
