@@ -102,7 +102,7 @@ app.post("/porkash", async(req, res) =>{
         const result = await model.generateContent(initPromt+prompt);
         const response = result.response;
         const text = response.text();
-        res.json(movements)
+        res.json(text)
     }catch(err){
         console.error('Error reading data', err)
         return res.status(500).send("Error")
