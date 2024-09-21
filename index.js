@@ -19,7 +19,6 @@ if(process.env.NODE_ENV != "production") globalForPrisma.prisma = prisma;
 
 const app = express()
 app.use(bodyParser.json())
-app.use(verifyKey)
 app.use(cors())
 
 const port = process.env.PORT || 3000
