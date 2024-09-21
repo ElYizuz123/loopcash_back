@@ -46,6 +46,21 @@ app.post("/user", async (req, res) =>{
                 total: 0.0
             }
         })
+        if(req.body.salary){
+            const repeatable = await prisma.Repeatable.create({
+                type:req.body.frecuency,
+            })
+            const movement = await prisma.Movement.create({
+                data:{
+                    type:'G',
+                    quantity:req.body.salary,
+                    isGoal:false,
+                    idRepeatable:repeatable.idRepeatable,
+                    idLoseType:null,
+                    idProfile:user.idProfile
+                }
+            })
+        }
         res.json(user);
     }catch(e){
         console.error('Error reading data', err)
