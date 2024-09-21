@@ -13,30 +13,38 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Movement{
-  idGanancia Int @id @default(autoincrement())
-  type String 
-  quantity Float 
-  isGoal Boolean @default(false)
-  
+model Movement {
+  idGanancia   Int        @id @default(autoincrement())
+  type         String
+  quantity     Float
+  isGoal       Boolean    @default(false)
+  idRepeatable Int
+  idLoseType   Int
+  idProfile    Int
+  Repeatable   Repeatable @relation(fields: [idRepeatable], references: [idRepeatable], onDelete: Cascade, onUpdate: NoAction, map: "fk_movement_movement")
+  LoseType     LoseType   @relation(fields: [idLoseType], references: [idLoseType], onDelete: Cascade, onUpdate: NoAction, map: "fk_movement_losetype")
+  Profile      Profile    @relation(fields: [idProfile], references: [idProfile], onDelete: Cascade, onUpdate: NoAction, map: "fk_movement_profile")
 }
 
-model Profile{
-  idProfile Int @id @default(autoincrement())
-  user String @unique
-  name String
-  password String
-  total Float
-  idAvatar Int 
+model Profile {
+  idProfile Int        @id @default(autoincrement())
+  user      String     @unique
+  name      String
+  password  String
+  total     Float      @default(0.0)
+  idAvatar  Int
+  Movement  Movement[]
 }
 
 model Repeatable {
-  idRepeatable Int @id @default(autoincrement())
-  type String
-  everyDate DateTime @db.Date
+  idRepeatable Int        @id @default(autoincrement())
+  type         String
+  everyDate    DateTime   @db.Date
+  Movement     Movement[]
 }
 
 model LoseType {
-  idLoseType Int @id @default(autoincrement())
-  name String 
+  idLoseType Int        @id @default(autoincrement())
+  name       String
+  Movement   Movement[]
 }

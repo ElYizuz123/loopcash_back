@@ -88,6 +88,33 @@ app.post("/porkash", async(req, res) =>{
     
 })
 
+app.post("/movement", async(req, res) => {
+    try{
+        if(req.body.idRepeatable){
+            const repeatable = await prisma.Repeatable.create({
+                data:{
+                    type:req.body.typeRepeatable,
+                    everyDate:req.body.everyDate,
+                }
+            })
+        }
+        const movement = await prisma.Movement.create({
+            data:{
+                type:req.body.type,
+                quantity:parseFloat(req.body.queantity),
+                isGoal:req.body.isGoal,
+                idRepeatable:(parseInt(req.body.idRepeatable)||null),
+                idLoseType:(parseInt(req.body.idLoseType)),
+                idProfile:(parseInt(req.body.idProfile))
+            }
+        })
+        
+    }catch(err){
+        console.error('Error reading data', err)
+        return res.status(500).send("Error")
+    }
+})
+
 app.get('/invest', async(req, res) =>{
     try{
         const response = await fetch(`https://api.finage.co.uk/agg/stock/AAPL/1/month/2020-02-05/2021-02-07?apikey=
@@ -99,6 +126,7 @@ app.get('/invest', async(req, res) =>{
         return res.status(500).send("Error")
     }
 })
+
 
 
 
