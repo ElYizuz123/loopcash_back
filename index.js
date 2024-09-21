@@ -62,7 +62,7 @@ app.post("/user", async (req, res) =>{
             })
         }
         res.json(user);
-    }catch(e){
+    }catch(err){
         console.error('Error reading data', err)
         return res.status(500).send("Error")
     }
