@@ -4,6 +4,8 @@ import bodyParser from "body-parser"
 import bcrypt from "bcrypt"
 import { verifyKey } from './middlewares/auth.js' 
 import { GoogleGenerativeAI } from '@google/generative-ai'
+import cors from 'cors'
+const config = require('./config')
 
 const PrismaClientSigleton = () => {
     return new PrismaClient();
@@ -19,6 +21,7 @@ if(process.env.NODE_ENV != "production") globalForPrisma.prisma = prisma;
 const app = express()
 app.use(bodyParser.json())
 app.use(verifyKey)
+app.use(cors())
 
 const port = process.env.PORT || 3000
 
