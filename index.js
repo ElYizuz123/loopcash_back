@@ -4,7 +4,6 @@ import bodyParser from "body-parser"
 import bcrypt from "bcrypt"
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import cors from 'cors'
-const config = require('./config')
 
 const PrismaClientSigleton = () => {
     return new PrismaClient();
