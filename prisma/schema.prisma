@@ -18,10 +18,10 @@ model Movement {
   type         String
   quantity     Float
   isGoal       Boolean    @default(false)
-  idRepeatable Int
+  idRepeatable Int?
   idLoseType   Int?
   idProfile    Int
-  Repeatable   Repeatable @relation(fields: [idRepeatable], references: [idRepeatable], onDelete: Cascade, onUpdate: NoAction, map: "fk_movement_movement")
+  Repeatable   Repeatable? @relation(fields: [idRepeatable], references: [idRepeatable], onDelete: Cascade, onUpdate: NoAction, map: "fk_movement_movement")
   LoseType     LoseType?   @relation(fields: [idLoseType], references: [idLoseType], onDelete: Cascade, onUpdate: NoAction, map: "fk_movement_losetype")
   Profile      Profile    @relation(fields: [idProfile], references: [idProfile], onDelete: Cascade, onUpdate: NoAction, map: "fk_movement_profile")
 }
