@@ -96,13 +96,13 @@ app.post("/porkash", async(req, res) =>{
                 LoseType:true,
             }
         })
-        const initPromt="Para esta query toma en cuenta que se tienen estos datos"+movements
+        const initPromt="Para esta query toma en cuenta que se tienen estos datos"
         const model = genAi.getGenerativeModel({model: "gemini-1.5-flash"})
         const prompt= req.body.text
         const result = await model.generateContent(initPromt+prompt);
         const response = result.response;
         const text = response.text();
-        res.json(text)
+        res.json(movements)
     }catch(err){
         console.error('Error reading data', err)
         return res.status(500).send("Error")
